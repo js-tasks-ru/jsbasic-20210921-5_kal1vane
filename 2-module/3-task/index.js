@@ -3,7 +3,7 @@ let calculator = {
     calculator.firstCount = a;
     calculator.secondCount = b;
   },
-  sum(a, b) {
+  sum() {
     return calculator.firstCount + calculator.secondCount;
   },
   mul() {
