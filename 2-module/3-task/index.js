@@ -3,11 +3,11 @@ let calculator = {
     calculator.firstCount = a;
     calculator.secondCount = b;
   },
-  sum() {
-    return sum = calculator.firstCount + calculator.secondCount;
+  sum(a, b) {
+    return calculator.firstCount + calculator.secondCount;
   },
   mul() {
-    return sum = calculator.firstCount * calculator.secondCount;
+    return calculator.firstCount * calculator.secondCount;
   }
 };
 
