@@ -1,17 +1,17 @@
 function camelize(str) {
   let arr = str.split('-');
-  let hey = [];
+  let allString = [];
   let uppString = arr.map(function(item, index) {
     
     if (index == 0) {
-      hey.push(item);
+      allString.push(item);
     } else {
       newItem = item[0].toUpperCase() + item.slice(1);
-      hey.push(newItem);
+      allString.push(newItem);
     }
-    return hey;
+    return allString;
   });
  
-  return hey.join('');
+  return allString.join('');
   // На сколько правильно и как лучше сделать решение?  
 }
