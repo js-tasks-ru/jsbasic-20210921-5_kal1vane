@@ -91,7 +91,13 @@
 .ribbon__item:hover {
   background-color: var(--color-black-light);
 }
-
+.ribbon__inner::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+}
 @media all and (max-width: 767px) {
   .ribbon {
     margin-bottom: 0;

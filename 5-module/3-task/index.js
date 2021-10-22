@@ -5,21 +5,22 @@ function initCarousel() {
   let carousel = document.querySelector('.carousel'); 
   let lengthCarousel = document.querySelectorAll('.carousel__slide');
   
-  let widthCarousel = photoCarousel.offsetWidth;
+  let widthCarousel;
   let carouselCurrentPosition = 0;
-  if (carouselCurrentPosition === 0) {
-    leftButton.style.display = 'none';
-  }
+  leftButton.style.display = 'none';
 
-  carousel.addEventListener('click', event => { 
-    let target = event.target;
 
-    if (target == leftButton) {
-      carouselCurrentPosition += widthCarousel;
-    } else if (target == rightButton) {
-      carouselCurrentPosition -= widthCarousel;
-    }
-  
+  rightButton.addEventListener('click', function () {
+    widthCarousel = photoCarousel.offsetWidth;
+    carouselCurrentPosition -= widthCarousel;
+    checkPostion();    
+  });
+  leftButton.addEventListener('click', function () {
+    widthCarousel = photoCarousel.offsetWidth;
+    carouselCurrentPosition += widthCarousel;
+    checkPostion();  
+  });
+  function checkPostion() {
     if (carouselCurrentPosition === 0) {
       leftButton.style.display = 'none';
     } else if (carouselCurrentPosition === -(lengthCarousel.length - 1) * widthCarousel) {
@@ -28,12 +29,6 @@ function initCarousel() {
       leftButton.style.display = '';
       rightButton.style.display = '';
     }
-
     photoCarousel.style.transform = `translateX(${carouselCurrentPosition}px)`;
-    
-    
-  });
-  
-  
-
+  }
 }

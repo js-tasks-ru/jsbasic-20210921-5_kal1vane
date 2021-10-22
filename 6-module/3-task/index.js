@@ -21,16 +21,17 @@ export default class Carousel {
     let carouselCurrentPosition = 0;
     leftButton.style.display = 'none';
 
-    this.divCarousel.addEventListener('click', event => { 
+    rightButton.addEventListener('click', function () {
       widthCarousel = photoCarousel.offsetWidth;
-      let target = event.target;
-      
-      if (target == leftButton) {
-        carouselCurrentPosition += widthCarousel;
-      } else if (target == rightButton) {
-        carouselCurrentPosition -= widthCarousel;
-      }
-  
+      carouselCurrentPosition -= widthCarousel;
+      checkPostion();    
+    });
+    leftButton.addEventListener('click', function () {
+      widthCarousel = photoCarousel.offsetWidth;
+      carouselCurrentPosition += widthCarousel;
+      checkPostion();  
+    });
+    function checkPostion() {
       if (carouselCurrentPosition === 0) {
         leftButton.style.display = 'none';
       } else if (carouselCurrentPosition === -(lengthCarousel.length - 1) * widthCarousel) {
@@ -39,11 +40,9 @@ export default class Carousel {
         leftButton.style.display = '';
         rightButton.style.display = '';
       }
-
       photoCarousel.style.transform = `translateX(${carouselCurrentPosition}px)`;
+    }
     
-    
-    });
 
     return this.divCarousel;
   }
