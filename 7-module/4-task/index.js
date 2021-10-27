@@ -66,7 +66,7 @@ export default class StepSlider {
     this.trueValue = Math.round(notTrueValue);
   }
   changeStepActive() {
-    const sliderValue = this.slider.querySelector('.slider__value');
+    const sliderValue = this.#slider.querySelector('.slider__value');
     sliderValue.textContent = this.trueValue;
     const activeStep = this.sliderSteps.querySelector('.slider__step-active');
     if (activeStep) {
@@ -75,7 +75,7 @@ export default class StepSlider {
     this.sliderSteps.children[this.trueValue].classList.add('slider__step-active');
   }
   createSteps() {
-    this.sliderSteps = this.slider.querySelector('.slider__steps');
+    this.sliderSteps = this.#slider.querySelector('.slider__steps');
     for (let i = 0; i < this.steps; i++) {
       this.span = document.createElement('SPAN');
       if (`${this.value}` == i) {
