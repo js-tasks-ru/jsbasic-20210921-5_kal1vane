@@ -1,4 +1,5 @@
 export default class StepSlider {
+
   #slider;
   constructor({ steps, value = 0 }) {
     this.steps = steps;
@@ -121,5 +122,8 @@ export default class StepSlider {
   dragAndDropActivate() {
     this.sliderTumbs.onpointerdown = this.pointerDown;
   }
+
+
+
 
 }
