@@ -39,12 +39,12 @@ export default class CartIcon {
   }
 
   updatePosition() {    
-    const mobailFixed = document.documentElement.clientWidth >= 767;
-    const positionDescopeFixed = window.pageYOffset > this.elem.getBoundingClientRect().top;
+    const removePosition = (this.elem.getBoundingClientRect().top + window.pageYOffset);
+    const positionFixed = this.elem.getBoundingClientRect().top;
 
-    if (mobailFixed && positionDescopeFixed) {
+    if (positionFixed < 0) {
       this.styleFixed();
-    } else {
+    } else if (positionFixed == removePosition) {
       this.styleDefault();
     }
   }
