@@ -38,35 +38,33 @@ export default class CartIcon {
     window.addEventListener('resize', () => this.updatePosition());
   }
 
-  updatePosition() {
-    const removePosition = (this.elem.getBoundingClientRect().top + window.pageYOffset);
-    const positionFixed = this.elem.getBoundingClientRect().top;
-    const container = document.querySelector('.header.container');
+  updatePosition() {    
+    const mobailFixed = document.documentElement.clientWidth >= 767;
+    const positionDescopeFixed = window.pageYOffset > this.elem.getBoundingClientRect().top;
 
-    const containerWidth = container.getBoundingClientRect().right + 20;
-
-    const widthElem = this.elem.offsetWidth;
-    const windowAvailable = document.documentElement.clientWidth;
-
-    const leftMargin = Math.min(
-      containerWidth,
-      windowAvailable - widthElem - 10
-    );
-
-    this.elem.style.left = `${leftMargin}px`;
-
-    if (positionFixed < 0) {
-      this.elem.style.position = 'fixed';
-      this.elem.style.top = '50px';
-      this.elem.style.zIndex = '1000';
-      this.elem.style.left = `${leftMargin}px`;
+    if (mobailFixed && positionDescopeFixed) {
+      this.styleFixed();
+    } else {
+      this.styleDefault();
     }
-    if (positionFixed == removePosition) {
-      this.elem.style = '';
-    }
-    const mobailFixed = document.documentElement.clientWidth;
-    if (mobailFixed <= 767) {
-      this.elem.style = '';
-    }
+  }
+  styleDefault() {
+    Object.assign(this.elem.style, {
+      position: '',
+      top: '',
+      zIndex: '',
+      left: ''
+    });
+  }
+  styleFixed() {
+    Object.assign(this.elem.style, {
+      position: 'fixed',
+      top: '50px',
+      zIndex: '1000',
+      left: `${Math.min(
+        document.querySelector('.container').getBoundingClientRect().right + 20,
+        document.documentElement.clientWidth - this.elem.offsetWidth - 10
+      )}px`
+    });
   }
 }
