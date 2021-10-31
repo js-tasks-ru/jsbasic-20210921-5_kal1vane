@@ -16,6 +16,7 @@ export default class Main {
   }
 
   async render() {
+
     Promise.all([this.carouselAdd(), this.ribbonMenuAdd(), this.sliderStepsAdd(), this.cartIconAdd()]);
 
     this.products = await this.fetchProducts();
