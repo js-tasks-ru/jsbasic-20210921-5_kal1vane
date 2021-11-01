@@ -17,6 +17,9 @@ export default class StepSlider {
     this.sliderProgress = this.#slider.querySelector('.slider__progress');
     this.defaultDragAndDropOff();
     this.dragAndDropActivate();
+    this.leftPercents = (100 / (this.steps - 1) * (this.value - 1));
+    this.sliderTumbs.style.left = `${this.leftPercents}%`;
+    this.sliderProgress.style.width = `${this.leftPercents}%`;
   }
  
   createSlider() {
@@ -79,7 +82,7 @@ export default class StepSlider {
     this.sliderSteps = this.#slider.querySelector('.slider__steps');
     for (let i = 0; i < this.steps; i++) {
       this.span = document.createElement('SPAN');
-      if (`${this.value}` == i) {
+      if (`${this.value - 1}` == i) {
         this.span.classList.add('slider__step-active');
       }
       this.sliderSteps.append(this.span);
@@ -101,7 +104,7 @@ export default class StepSlider {
   onPointerUp = (event) => {
     document.removeEventListener('pointermove', this.onPointerMove);
     this.#slider.classList.remove('slider_dragging');
-    this.sliderTumbs.onpointerup = null;
+    document.onpointerup = null;
     this.sliderStepHandler(event);
   }
   pointerDown = () => {

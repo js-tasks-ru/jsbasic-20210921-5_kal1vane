@@ -93,7 +93,7 @@ export default class Cart {
               <img src="/assets/images/icons/square-plus-icon.svg" alt="plus">
             </button>
           </div>
-          <div class="cart-product__price">€${product.price.toFixed(2)}</div>
+          <div class="cart-product__price">€${(product.price * count).toFixed(2)}</div>
         </div>
       </div>
     </div>`);
@@ -149,13 +149,14 @@ export default class Cart {
     this.div.querySelector('.cart-form').addEventListener('submit', (event) => this.onSubmit(event));
     
     this.div.addEventListener('click', event => {
-      let idCartProduct = event.target.closest('.cart-product').dataset.productId;
+      const minusBtn = event.target.closest('.cart-counter__button_minus');
+      const plusBtn = event.target.closest('.cart-counter__button_plus');
 
-      if (event.target.closest('.cart-counter__button_minus')) {
-        this.updateProductCount(idCartProduct, -1);
+      if (minusBtn) {
+        this.updateProductCount(event.target.closest('.cart-product').dataset.productId, -1);
       }
-      if (event.target.closest('.cart-counter__button_plus')) {
-        this.updateProductCount(idCartProduct, 1);
+      if (plusBtn) {
+        this.updateProductCount(event.target.closest('.cart-product').dataset.productId, 1);
       }
       
     });
@@ -198,6 +199,7 @@ export default class Cart {
     .then(() => {
       this.modal.setTitle("Success!");
       this.cartItems.length = 0;
+      document.querySelector('.cart-icon').classList.remove('cart-icon_visible');
       this.modal.setBody(this.submitFormSuccess());  
     });
   }
